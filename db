@@ -1,0 +1,50 @@
+/*
+-- Create a new database called 'FYP'
+-- Connect to the 'master' database to run this snippet
+USE master
+GO
+-- Create the new database if it does not exist already
+IF NOT EXISTS (
+    SELECT name
+        FROM sys.databases
+        WHERE name = N'FYP'
+)
+CREATE DATABASE FYP
+GO*/
+/*
+-- Create a new table called 'TableName' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.opensky', 'U') IS NOT NULL
+DROP TABLE dbo.opensky
+GO
+-- Create the table in the specified schema
+--CREATE SEQUENCE my_table1_seq START with 1 INCREMENT by 1;
+CREATE TABLE dbo.opensky
+(
+    id INT NOT NULL IDENTITY PRIMARY KEY,
+    icao24 varchar(35),
+    callsign varchar(35),
+    origin_country varchar(35),
+    time_position int,
+    last_contact int,
+    longitude DECIMAL,
+    latitude DECIMAL,
+    geo_altitude DECIMAL,
+    on_ground BIT,
+    velocity DECIMAL,
+    heading DECIMAL,
+    vertical_rate DECIMAL,
+    sensors VARCHAR(35),
+    baro_altitude DECIMAL,
+    squawk VARCHAR(35),
+    spi BIT,
+    --position_source - origin of this state’s position: 0 = ADS-B, 1 = ASTERIX, 2 = MLAT, 3 = FLARM
+    position_source int,
+    DateInserted DATETIME NOT NULL DEFAULT (GETDATE())
+);
+GO*/
+
+-- Select rows from a Table or View 'TableOrViewName' in schema 'SchemaName'
+SELECT * FROM dbo.opensky
+ 	/* add search conditions here */
+GO
