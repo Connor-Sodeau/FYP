@@ -57,28 +57,14 @@ Server = server,
 Database = database)
 cursor = cnxn.cursor()
 
+def queryDB():
+    for i in range(len(baro_altitude)):
+        print ('Inserting a new row into table')
+        tsql = "INSERT INTO opensky (icao24, callsign, origin_country,time_position,last_contact,longitude,latitude,geo_altitude,on_ground,velocity,heading,vertical_rate,sensors,baro_altitude,squawk,spi,position_source)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+        with cursor.execute(tsql,icao24[i],callsign[i],origin_country[i],time_position[i],last_contact[i],longitude[i]
+        ,latitude[i],geo_altitude[i],on_ground[i],velocity[i],heading[i],vertical_rate[i],sensors[i],baro_altitude[i],
+        squawk[i],spi[i],position_source[i]):
+         print ('Successfully Inserted!')
+          #change
 
-for i in range(len(baro_altitude)):
-    print ('Inserting a new row into table')
-    tsql = "INSERT INTO opensky (icao24, callsign, origin_country,time_position,last_contact,longitude,latitude,geo_altitude,on_ground,velocity,heading,vertical_rate,sensors,baro_altitude,squawk,spi,position_source)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-    with cursor.execute(tsql,icao24[i],callsign[i],origin_country[i],time_position[i],last_contact[i],longitude[i]
-    ,latitude[i],geo_altitude[i],on_ground[i],velocity[i],heading[i],vertical_rate[i],sensors[i],baro_altitude[i],
-    squawk[i],spi[i],position_source[i]):
-      print ('Successfully Inserted!')
-        #change
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+schedule.every(15).seconds.do(queryDB())
